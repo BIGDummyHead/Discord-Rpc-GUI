@@ -49,7 +49,7 @@ ________________________________________________________________________________
 
 I know the design is not the best, but was made really fast! If you have any design ideas or in general, please let me know! I am always open for criticism on the artwork as it is not my strong suite. I am also open for forking and collaboration
 
-As for using this work and modifying, please make sure you give proper credit!
+As for modifying this work, please make sure you give proper credit!
 
 ## Dependencies
 
