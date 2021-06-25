@@ -348,7 +348,140 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="FocusVisual2">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <Style x:Key="GrayButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual2}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF3E3E40"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <Style x:Key="Other" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual2}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF18191C"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="ExitButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual2}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" TargetName="border" Value="red"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual3">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid x:Name="mainGrid">
@@ -375,18 +508,14 @@
         </DockPanel>
         <DockPanel Grid.Column="2" Background="#FF36393F">
             <Rectangle Width="135" HorizontalAlignment="Right"/>
-            <Button Style="{DynamicResource RoundButtonDragWindow}" Click="HideApp" HorizontalContentAlignment="Center" FontSize="15" VerticalContentAlignment="Center" Background="#FFFEDA79" Content="-" FontWeight="UltraBlack" Width="30"/>
-            <Button Style="{DynamicResource RoundButtonDragWindow}" Background="#FFD02032" Content="X" FontWeight="UltraBlack" Width="30" HorizontalAlignment="Right" Click="CloseApplication"/>
+            <Button Style="{DynamicResource GrayButton}" Click="HideApp" HorizontalContentAlignment="Center" BorderThickness="0" Foreground="White" FontSize="15" VerticalContentAlignment="Center" Background="#FF1A1A1A" Content="-" FontWeight="UltraBlack" Width="30">
+            </Button>
+            <Button Style="{DynamicResource ExitButton}" BorderThickness="0" Background="#FF1A1A1A" Foreground="White" Content="X" FontWeight="UltraBlack" Width="30" HorizontalAlignment="Right" Click="CloseApplication"/>
         </DockPanel>
         <DockPanel Width="340" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
         <DockPanel Grid.Column="2" Width="90" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
 
-        <Rectangle Grid.Row="1" Fill="Black"/>
-
-        <Rectangle Grid.Row="3" Fill="Black"/>
-
-        <Rectangle Grid.Column="2" Grid.Row="1" Fill="Black"/>
-        <Rectangle Grid.Column="2" Grid.Row="3" Fill="Black"/>
+       
 
 
 
@@ -396,6 +525,7 @@
                 <DockPanel>
                     <StackPanel>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Profile Name</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="profName" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -403,6 +533,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock FontSize="20" Foreground="White" Width="auto">Application ID</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="appID" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -410,6 +541,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock FontSize="20" Foreground="White" Width="auto">Status</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="state" TextChanged="NumbersChanged" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -417,6 +549,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock FontSize="20" Foreground="White" Width="auto">Details</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="details" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -434,6 +567,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Large Image Key</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="lg_img_key" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -442,6 +576,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Large Image Text</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="lg_img_txt" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -450,6 +585,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Small Image Key</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="sm_img_key" TextChanged="UpdateSmall" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -457,6 +593,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Small Image Text</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="sm_img_txt" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -475,6 +612,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Party Size</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="part_size" FontSize="18" TextChanged="NumbersChanged" Background="#FF2F3136" Opacity=".8" Foreground="White" KeyDown="NumberOnlyKey" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -482,6 +620,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Max Party Size</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="part_max" FontSize="18" TextChanged="NumbersChanged" Background="#FF2F3136" Opacity=".8" Foreground="White" KeyDown="NumberOnlyKey" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -492,6 +631,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Button (1) Text</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="button_1_text" TextChanged="ActivateButton1" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -499,6 +639,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Button (1) URL</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="button_1_url"  FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -507,6 +648,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Button (2) Text</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox TextChanged="ActivateButton2" x:Name="button_2_text" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -514,6 +656,7 @@
                     <StackPanel>
                         <Rectangle Height="10"/>
                         <TextBlock Foreground="White" FontSize="20" Width="auto">Button (2) URL</TextBlock>
+                        <Rectangle Height="2"/>
                         <TextBox x:Name="button_2_url" FontSize="18" Background="#FF2F3136" Opacity=".8" Foreground="White" BorderThickness="1" BorderBrush="Black"/>
                     </StackPanel>
                 </DockPanel>
@@ -537,8 +680,7 @@
             <Rectangle Width="2" Height="50" Fill="Black"/>
             <Rectangle Width="92" Height="0"/>
             <Rectangle Width="2" Height="50" Fill="Black"/>
-            <Rectangle Width="2" Height="0"/>
-            <Button x:Name="saveButton" Style="{DynamicResource RoundButtonDragWindow}" Foreground="White" Cursor="Hand" BorderBrush="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" FontWeight="SemiBold" FontSize="18" Background="Transparent" Height="46" Click="SaveClick">
+            <Button Style="{DynamicResource Other}" x:Name="saveButton" Foreground="White" Cursor="Hand" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="108" FontWeight="SemiBold" FontSize="18" Background="Transparent" Height="46" Click="SaveClick">
                 Save Profile
             </Button>
 
@@ -594,16 +736,22 @@
         </Border>
 
 
-        <Button  x:Name="run" Style="{DynamicResource RoundButtonDragWindow}" Cursor="Hand" BorderBrush="Black"  VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="32" Foreground="Red" Background="#FF36393F" FontWeight="SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="202" Height="46" Click="RunClick">
+        <Button Style="{DynamicResource Other}" x:Name="run" Cursor="Hand" BorderBrush="Black"  VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="32" Foreground="Red" Background="#FF36393F" FontWeight="SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="202" Height="46" Click="RunClick">
             Run
         </Button>
 
+        <Rectangle Grid.Row="1" Fill="#FF1A1A1A"/>
+
+        <Rectangle Grid.Row="3" Fill="#FF1A1A1A"/>
+
+        <Rectangle Grid.Column="2" Grid.Row="1" Fill="#FF1A1A1A"/>
+        <Rectangle Grid.Column="2" Grid.Row="3" Fill="#FF1A1A1A"/>
         <Rectangle Grid.Column="1" Fill="#FF36393F" Grid.RowSpan="1"/>
-        <Rectangle Grid.Column="1" Fill="Black" Grid.RowSpan="2" Height="8" VerticalAlignment="Bottom"/>
-        <Rectangle Grid.Column="1" Grid.Row="2" Fill="Black"/>
-        <Rectangle Grid.Column="1" Grid.Row="3" Fill="Black"/>
-        <Rectangle Grid.Column="1" Grid.Row="4" Fill="Black"/>
-        <Rectangle Grid.Column="1" Grid.Row="5" Fill="Black"/>
+        <Rectangle Grid.Column="1" Fill="#FF1A1A1A" Grid.RowSpan="2" Height="8" VerticalAlignment="Bottom"/>
+        <Rectangle Grid.Column="1" Grid.Row="2" Fill="#FF1A1A1A"/>
+        <Rectangle Grid.Column="1" Grid.Row="3" Fill="#FF1A1A1A"/>
+        <Rectangle Grid.Column="1" Grid.Row="4" Fill="#FF1A1A1A"/>
+        <Rectangle Grid.Column="1" Grid.Row="5" Fill="#FF1A1A1A"/>
         <CheckBox Content="CheckBox" Grid.Column="2" HorizontalAlignment="Left" Margin="311,214,0,0" Grid.Row="2" VerticalAlignment="Top"/>
 
     </Grid>

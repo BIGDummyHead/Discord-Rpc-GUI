@@ -23,13 +23,14 @@ namespace DiscordRpcGUI
             Stream iconStream = GetResourceStream(new Uri("pack://application:,,,/Resources/icon.ico")).Stream;
             not.Icon = new Icon(iconStream);
             iconStream.Dispose();
+            not.BalloonTipClicked += OpenBack;
             not.Click += OpenBack;
         }
 
         public static void Min()
         {
             not.Visible = true;
-            not.ShowBalloonTip(3000, "Discord RPC", "Your RPC has been minimized to the tray! Don't worry we'll keep the hamsters rollin'", ToolTipIcon.Info);
+            not.ShowBalloonTip(750, "Discord RPC", "Your RPC has been minimized to the tray! Don't worry we'll keep the hamsters rollin'", ToolTipIcon.Info);
         }
 
         void OpenBack(object sender, EventArgs e)

@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AssemblyName>Discord Rpc GUI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
