@@ -252,7 +252,7 @@
             <Button x:Name="saveButton" Cursor="Hand" BorderBrush="Black" BorderThickness=".1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" FontWeight="SemiBold" FontSize="18" Background="Transparent" Height="46" Click="SaveClick">
                 Save Profile
             </Button>
-            
+
 
 
         </DockPanel>
@@ -263,10 +263,10 @@
         <Rectangle Grid.Column="2" Grid.Row="2" Height="190" Width="190" Fill="Black"/>
 
         <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="11" TextAlignment="Center" FontWeight="Bold" Margin="10,136,94,284">PLAYING A GAME</TextBlock>
-        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="12" TextAlignment="Left" FontWeight="SemiBold" Margin="77,162,56,258" Text="App Name"/>
-        <TextBlock Background="Transparent"  Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left"  Margin="77,186,5,234" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=details, Path=Text}"/>
-        <TextBlock x:Name="state_label" Background="Transparent" Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="77,212,5,208" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=state, Path=Text, Converter={StaticResource PartyConvert}}"/>
-        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="77,236,56,184" TextTrimming="CharacterEllipsis" Text="00:00 left"/>
+        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="12" TextAlignment="Left" FontWeight="SemiBold" Margin="80,162,56,258" Text="App Name"/>
+        <TextBlock Background="Transparent"  Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left"  Margin="80,186,7,234" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=details, Path=Text}"/>
+        <TextBlock x:Name="state_label" Background="Transparent" Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="80,212,7,208" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=state, Path=Text, Converter={StaticResource PartyConvert}}"/>
+        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="80,236,56,184" TextTrimming="CharacterEllipsis" Text="00:00 left"/>
         <TextBlock x:Name="seeJoinButton" Visibility="Hidden" Background="Gray" Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="White" FontSize="13" Cursor="Hand" TextAlignment="Center" Margin="5,261,5,159" TextTrimming="CharacterEllipsis" Text="Ask to Join"/>
         <Rectangle  MouseLeave="BigImgLeave" MouseEnter="BigImgEnter" Fill="Blue" Cursor="Hand" x:Name="bigImage" Grid.Column="2" Grid.Row="2" Margin="12,168,130,208"/>
 
@@ -277,7 +277,7 @@
         <TextBox x:Name="popup_small" Grid.Row="2" Grid.Column="2" Text="{Binding ElementName=sm_img_txt, Path=Text}" FontSize="14" Visibility="Hidden" Background="DarkGray" Foreground="Black" Height="122" VerticalAlignment="Top" TextWrapping="Wrap"/>
 
         <Ellipse Fill="Red" Cursor="Hand" MouseEnter="SmallImgEnter" MouseLeave="SmallImgLeave" Visibility="Hidden" x:Name="smallImage" Grid.Column="2" Grid.Row="2" Margin="50,214,123,200"/>
-        
+
         <TextBlock x:Name="visualizer_button1" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Visibility="Hidden" Grid.Column="2" Background="Gray" Height="30" Margin="0,333,0,77" Text="{Binding ElementName=button_1_text, Path=Text}"/>
         <TextBlock x:Name="visualizer_button2" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Visibility="Hidden" Grid.Column="2" Background="Gray" Height="30" Margin="0,379,0,31" Text="{Binding ElementName=button_2_text, Path=Text}"/>
 

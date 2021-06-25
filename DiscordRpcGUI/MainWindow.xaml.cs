@@ -120,15 +120,25 @@ namespace DiscordRpcGUI
 
         public Profile GetProfile()
         {
+            int partSize = 0;
+            int max = 0;
+
+            if((bool)allowJoin.IsChecked)
+            {
+                max = Max_PartySize;
+                partSize = PartySize;
+            }
+
             return new Profile(profName.Text, appID.Text)
             {
                 Details = details.Text,
                 Assets = GetAssets(),
                 Buttons = GetButtons(),
-                PartySize = PartySize,
-                MaxPartySize = Max_PartySize,
                 State = state.Text,
                 UseTimer = (bool)time_start.IsChecked,
+                MaxPartySize = max,
+                PartySize = partSize,
+                AllowJoin = (bool)allowJoin.IsChecked,
             };
         }
 
