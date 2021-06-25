@@ -728,11 +728,11 @@
         <Ellipse Fill="Red" Cursor="Hand" MouseEnter="SmallImgEnter" MouseLeave="SmallImgLeave" Visibility="Hidden" x:Name="smallImage" Grid.Column="2" Grid.Row="2" Margin="50,214,123,200"/>
 
         <Border x:Name="visualizer_button1" Visibility="Collapsed" Grid.Row="2" Grid.Column="2" Margin="6,292,7,112" CornerRadius=".2" BorderThickness="3" BorderBrush="#FF474747" Width="190">
-            <TextBlock Foreground="White" Cursor="Hand" Grid.Row="2" FontSize="18" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Grid.Column="2" Background="#FF474747" Height="30" Text="{Binding ElementName=button_1_text, Path=Text}"/>
+            <TextBlock Foreground="White" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Grid.Column="2" Background="#FF474747" Height="30" Text="{Binding ElementName=button_1_text, Path=Text}"/>
         </Border>
 
         <Border  x:Name="visualizer_button2" Visibility="Collapsed" Grid.Row="2" Grid.Column="2" CornerRadius=".2" BorderThickness="3" Margin="6,333,7,71" BorderBrush="#FF474747" Width="190">
-            <TextBlock Foreground="White" Cursor="Hand" Grid.Row="2" FontSize="18" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Grid.Column="2" Background="#FF474747" Height="30" Text="{Binding ElementName=button_2_text, Path=Text}"/>
+            <TextBlock Foreground="White" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Grid.Column="2" Background="#FF474747" Height="30" Text="{Binding ElementName=button_2_text, Path=Text}"/>
         </Border>
 
 
