@@ -116,7 +116,31 @@ namespace DiscordRpcGUI
             }
         }
 
-        private string FindName => Name.ToLower().Replace(" ", "_");
+        private string FindName
+        {
+            get
+            {
+                string rep = Name.ToLower().Replace(" ", "_");
+
+                string invalid = new StringBuilder().Append(Path.GetInvalidFileNameChars()).ToString();
+
+                string fName = string.Empty;
+                foreach (char c in rep)
+                {
+                    if (!invalid.Contains(c, StringComparison.OrdinalIgnoreCase))
+                        fName += c;
+                }
+
+                if (string.IsNullOrEmpty(fName))
+                {
+                    string tmp = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
+
+                    fName = $"unknown_{tmp}";
+                }
+
+                return fName;
+            }
+        }
         const string dir = "Profiles\\";
         public string CurrentSave => $"{dir}{FindName}.prof";
         const string extension = ".prof";

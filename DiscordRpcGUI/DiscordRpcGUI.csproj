@@ -9,9 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\big.jpg" />
     <None Remove="Resources\big.png" />
     <None Remove="Resources\icon.ico" />
     <None Remove="Resources\small.jpg" />
+    <None Remove="Resources\small.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\big.png" />
+    <Resource Include="Resources\big.jpg" />
     <Resource Include="Resources\icon.ico" />
-    <Resource Include="Resources\small.jpg" />
+    <Resource Include="Resources\small.png" />
   </ItemGroup>
 
 </Project>

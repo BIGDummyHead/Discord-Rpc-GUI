@@ -33,8 +33,8 @@ namespace DiscordRpcGUI
 
             RunChange(false);
 
-            Fill("small.jpg", smallImage);
-            Fill("big.png", bigImage);
+            Fill("small.png", smallImage);
+            Fill("big.jpg", bigImage);
 
             allowJoin.ChangeCheck(true);
 
@@ -70,6 +70,7 @@ namespace DiscordRpcGUI
         {
             ImageBrush imgBrush = new();
 
+            imgBrush.Stretch = Stretch.UniformToFill;
             imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/" + resourceName, UriKind.Absolute));
 
             toFill.Fill = imgBrush;
@@ -164,7 +165,9 @@ namespace DiscordRpcGUI
         public void Load(Profile profile)
         {
             if (profile is null)
+            {
                 return;
+            }
 
             int buttonCount = profile.Buttons.Length;
 
@@ -180,6 +183,16 @@ namespace DiscordRpcGUI
                     button_2_text.Text = b2.Label;
                     button_2_url.Text = b2.Url;
                 }
+                else
+                {
+                    button_2_text.Text = string.Empty;
+                    button_2_url.Text = string.Empty;
+                }
+            }
+            else
+            {
+                button_1_text.Text = string.Empty;
+                button_1_url.Text = string.Empty;
             }
             state.Text = profile.State;
             time_start.IsChecked = profile.UseTimer;
@@ -197,6 +210,21 @@ namespace DiscordRpcGUI
             }
 
             allowJoin.IsChecked = profile.AllowJoin;
+
+            if (!profile.AllowJoin)
+            {
+                ChangeVisibility(Visibility.Collapsed, sJB, seeJoinButton);
+
+            }
+            else
+            {
+                ChangeVisibility(Visibility.Visible, sJB, seeJoinButton);
+            }
+
+            if (profile.UseTimer)
+                vis_timer.Visibility = Visibility.Visible;
+            else
+                vis_timer.Visibility = Visibility.Collapsed;
 
             part_size.Text = profile.PartySize.ToString();
             part_max.Text = profile.MaxPartySize.ToString();
@@ -297,7 +325,7 @@ namespace DiscordRpcGUI
 
             if ((bool)!box.IsChecked)
             {
-                ChangeVisibility(Visibility.Collapsed, maxPartySizeController, partySizeController, seeJoinButton);
+                ChangeVisibility(Visibility.Collapsed, maxPartySizeController, partySizeController, seeJoinButton, sJB);
             }
             else
             {
@@ -305,7 +333,7 @@ namespace DiscordRpcGUI
 
                 if (PartySize > 0 && Max_PartySize > 0 && Max_PartySize >= PartySize)
                 {
-                    seeJoinButton.Visibility = Visibility.Visible;
+                    ChangeVisibility(Visibility.Collapsed, seeJoinButton, sJB);
                 }
             }
 
@@ -338,6 +366,7 @@ namespace DiscordRpcGUI
 
             client.SetPresence(presence);
 
+
             RunChange(true);
         }
 
@@ -364,7 +393,7 @@ namespace DiscordRpcGUI
             TextBox box = sender as TextBox;
 
             if (string.IsNullOrEmpty(box.Text))
-                smallImage.Visibility = Visibility.Hidden;
+                smallImage.Visibility = Visibility.Collapsed;
             else
                 smallImage.Visibility = Visibility.Visible;
         }
@@ -383,7 +412,7 @@ namespace DiscordRpcGUI
         void Change(TextBox tb, UIElement ele)
         {
             if (string.IsNullOrEmpty(tb.Text))
-                ele.Visibility = Visibility.Hidden;
+                ele.Visibility = Visibility.Collapsed;
             else
                 ele.Visibility = Visibility.Visible;
         }
@@ -402,7 +431,7 @@ namespace DiscordRpcGUI
             else
             {
                 windowMain.Height = OriHeight;
-                ChangeVisibility(Visibility.Hidden, hideableButt, hideableOpap, hideableTb);
+                ChangeVisibility(Visibility.Collapsed, hideableButt, hideableOpap, hideableTb);
             }
         }
 
@@ -429,7 +458,7 @@ namespace DiscordRpcGUI
 
         private void BigImgLeave(object sender, MouseEventArgs e)
         {
-            ChangeVisibility(Visibility.Hidden, popup_large);
+            ChangeVisibility(Visibility.Collapsed, popup_large);
         }
 
         private void SmallImgEnter(object sender, MouseEventArgs e)
@@ -444,7 +473,7 @@ namespace DiscordRpcGUI
 
         private void SmallImgLeave(object sender, MouseEventArgs e)
         {
-            ChangeVisibility(Visibility.Hidden, popup_small);
+            ChangeVisibility(Visibility.Collapsed, popup_small);
 
         }
 
@@ -454,6 +483,18 @@ namespace DiscordRpcGUI
             ShowInTaskbar = false;
 
             App.Min();
+        }
+
+        private void TimeStopClick(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+
+            bool check = (bool)cb.IsChecked;
+
+            if (check)
+                vis_timer.Visibility = Visibility.Visible;
+            else
+                vis_timer.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -482,6 +523,7 @@ namespace DiscordRpcGUI
                 {
                     txt += $" ({Window.part_size.Text} of {Window.part_max.Text})";
                     Window.seeJoinButton.Visibility = Visibility.Visible;
+                    Window.sJB.Visibility = Visibility.Visible;
                 }
             }
 
