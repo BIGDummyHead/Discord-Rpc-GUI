@@ -1,0 +1,298 @@
+﻿<Window x:Class="DiscordRpcGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiscordRpcGUI"
+        mc:Ignorable="d"
+        Title="Discord RPC" ResizeMode="NoResize" WindowStyle="None" Height="532" Width="610" x:Name="windowMain">
+
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundButtonDragWindow" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <local:PartyConverter x:Key="PartyConvert"/>
+
+    </Window.Resources>
+
+    <Grid x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="440"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="46"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition  Width="203"/>
+        </Grid.ColumnDefinitions>
+
+
+        <DockPanel Grid.Row="0" Background="SlateGray">
+            <TextBlock x:Name="title" Width="300" HorizontalAlignment="Right" Height="20"  FontSize="16" TextAlignment="Left" TextWrapping="Wrap">
+                 Discord RPC on <Hyperlink NavigateUri="https://github.com/bigdummyhead" RequestNavigate="GotoHyper">GitHub</Hyperlink>
+            </TextBlock>
+            <Rectangle Width="190" HorizontalAlignment="Right"/>
+        </DockPanel>
+        <DockPanel Grid.Column="2" Background="SlateGray">
+            <Rectangle Width="135" HorizontalAlignment="Right"/>
+            <Button Style="{DynamicResource RoundButtonDragWindow}" Click="HideApp" HorizontalContentAlignment="Center" FontSize="15" VerticalContentAlignment="Center" Background="Yellow" Content="-" FontWeight="UltraBlack" Width="30"/>
+            <Button Style="{DynamicResource RoundButtonDragWindow}" Background="Red" Content="X" FontWeight="UltraBlack" Width="30" HorizontalAlignment="Right" Click="CloseApplication"/>
+        </DockPanel>
+        <DockPanel Width="340" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
+        <DockPanel Grid.Column="2" Width="90" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
+
+        <Rectangle Grid.Row="1" Fill="Black"/>
+
+        <Rectangle Grid.Row="3" Fill="Black"/>
+
+        <Rectangle Grid.Column="2" Grid.Row="1" Fill="Black"/>
+        <Rectangle Grid.Column="2" Grid.Row="3" Fill="Black"/>
+
+
+
+        <!-- Binding data for visualizer and for creating the actual rpc-->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" Grid.Row="2" Height="440" Background="SlateGray">
+            <StackPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <TextBlock FontSize="20" Width="auto">Profile Name</TextBlock>
+                        <TextBox x:Name="profName" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Application ID</TextBlock>
+                        <TextBox x:Name="appID" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Status</TextBlock>
+                        <TextBox x:Name="state" TextChanged="NumbersChanged" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Details</TextBlock>
+                        <TextBox x:Name="details" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <CheckBox x:Name="time_start" FontSize="20">Use Start Time</CheckBox>
+                        <Rectangle Width="auto" Height="10"/>
+                        <Rectangle Fill="Black" Width="auto" Height="1"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Large Image Key</TextBlock>
+                        <TextBox x:Name="lg_img_key" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Large Image Text</TextBlock>
+                        <TextBox x:Name="lg_img_txt" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Small Image Key</TextBlock>
+                        <TextBox x:Name="sm_img_key" TextChanged="UpdateSmall" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Small Image Text</TextBlock>
+                        <TextBox x:Name="sm_img_txt" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <CheckBox Click="ChangeJoin" x:Name="allowJoin" FontSize="20">Allow Join</CheckBox>
+                        <Rectangle Width="auto" Height="10"/>
+                        <Rectangle Fill="Black" Width="auto" Height="1"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel x:Name="partySizeController">
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Party Size</TextBlock>
+                        <TextBox x:Name="part_size" FontSize="18" TextChanged="NumbersChanged" Background="Transparent" KeyDown="NumberOnlyKey" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel x:Name="maxPartySizeController">
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Max Party Size</TextBlock>
+                        <TextBox x:Name="part_max" FontSize="18" TextChanged="NumbersChanged" Background="Transparent" KeyDown="NumberOnlyKey" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Button (1) Text</TextBlock>
+                        <TextBox x:Name="button_1_text" TextChanged="ActivateButton1" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Button (1) URL</TextBlock>
+                        <TextBox x:Name="button_1_url"  FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Button (2) Text</TextBlock>
+                        <TextBox TextChanged="ActivateButton2" x:Name="button_2_text" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel>
+                        <Rectangle Height="10"/>
+                        <TextBlock FontSize="20" Width="auto">Button (2) URL</TextBlock>
+                        <TextBox x:Name="button_2_url" FontSize="18" Background="Transparent" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+                </DockPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <DockPanel x:Name="hideableOpap" Grid.Row="2" Height="440" Background="Black" Opacity=".8"/>
+        <TextBlock x:Name="hideableTb" Grid.Row="2" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="29">Your RPC is currently running!</TextBlock>
+        <Button x:Name="hideableButt" Grid.Row="2" Content="STOP" Height="50" Background="Black" Opacity=".85" Foreground="Red" FontSize="25" Width="100" Margin="150,285,150,105" Click="StopRpc"/>
+
+
+
+
+        <DockPanel Grid.Row="4" Background="SlateGray">
+            <ComboBox Cursor="Hand" FontSize="23" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="profileBox" SelectionChanged="LoadOtherProfile"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="200" Height="46"/>
+            <Rectangle Width="99.5" Height="0"/>
+            <Button x:Name="saveButton" Cursor="Hand" BorderBrush="Black" BorderThickness=".1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" FontWeight="SemiBold" FontSize="18" Background="Transparent" Height="46" Click="SaveClick">
+                Save Profile
+            </Button>
+            
+
+
+        </DockPanel>
+
+        <Rectangle Fill="SlateGray" Grid.Column="2" Grid.Row="2"/>
+
+        <Rectangle Grid.Column="2" Grid.Row="2" Height="200" Width="200" Fill="SlateGray"/>
+        <Rectangle Grid.Column="2" Grid.Row="2" Height="190" Width="190" Fill="Black"/>
+
+        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="11" TextAlignment="Center" FontWeight="Bold" Margin="10,136,94,284">PLAYING A GAME</TextBlock>
+        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="12" TextAlignment="Left" FontWeight="SemiBold" Margin="77,162,56,258" Text="App Name"/>
+        <TextBlock Background="Transparent"  Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left"  Margin="77,186,5,234" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=details, Path=Text}"/>
+        <TextBlock x:Name="state_label" Background="Transparent" Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="77,212,5,208" TextTrimming="CharacterEllipsis" Text="{Binding ElementName=state, Path=Text, Converter={StaticResource PartyConvert}}"/>
+        <TextBlock Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="Gray" FontSize="13" TextAlignment="Left" Margin="77,236,56,184" TextTrimming="CharacterEllipsis" Text="00:00 left"/>
+        <TextBlock x:Name="seeJoinButton" Visibility="Hidden" Background="Gray" Width="auto" Height="auto" Grid.Column="2" Grid.Row="2" Foreground="White" FontSize="13" Cursor="Hand" TextAlignment="Center" Margin="5,261,5,159" TextTrimming="CharacterEllipsis" Text="Ask to Join"/>
+        <Rectangle  MouseLeave="BigImgLeave" MouseEnter="BigImgEnter" Fill="Blue" Cursor="Hand" x:Name="bigImage" Grid.Column="2" Grid.Row="2" Margin="12,168,130,208"/>
+
+        <TextBlock  Grid.Row="2" Grid.Column="2" FontWeight="SemiBold" TextAlignment="Center" FontSize="19" Margin="0,90,0,315">Discord RPC Visualizer</TextBlock>
+
+
+        <TextBox x:Name="popup_large" Grid.Row="2" Grid.Column="2" Text="{Binding ElementName=lg_img_txt, Path=Text}" FontSize="14" Visibility="Hidden" Background="DarkGray" Foreground="Black" Height="122" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        <TextBox x:Name="popup_small" Grid.Row="2" Grid.Column="2" Text="{Binding ElementName=sm_img_txt, Path=Text}" FontSize="14" Visibility="Hidden" Background="DarkGray" Foreground="Black" Height="122" VerticalAlignment="Top" TextWrapping="Wrap"/>
+
+        <Ellipse Fill="Red" Cursor="Hand" MouseEnter="SmallImgEnter" MouseLeave="SmallImgLeave" Visibility="Hidden" x:Name="smallImage" Grid.Column="2" Grid.Row="2" Margin="50,214,123,200"/>
+        
+        <TextBlock x:Name="visualizer_button1" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Visibility="Hidden" Grid.Column="2" Background="Gray" Height="30" Margin="0,333,0,77" Text="{Binding ElementName=button_1_text, Path=Text}"/>
+        <TextBlock x:Name="visualizer_button2" Cursor="Hand" Grid.Row="2" FontSize="20" FontWeight="SemiBold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Visibility="Hidden" Grid.Column="2" Background="Gray" Height="30" Margin="0,379,0,31" Text="{Binding ElementName=button_2_text, Path=Text}"/>
+
+
+        <Button x:Name="run" Cursor="Hand" BorderBrush="Black" BorderThickness="2" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="32" Foreground="Red" Background="SlateGray" FontWeight="SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="202" Height="46" Click="RunClick">
+            Run
+        </Button>
+
+        <Rectangle Grid.Column="1" Fill="SlateGray" Grid.RowSpan="1"/>
+        <Rectangle Grid.Column="1" Fill="Black" Grid.RowSpan="2" Height="8" VerticalAlignment="Bottom"/>
+        <Rectangle Grid.Column="1" Grid.Row="2" Fill="Black"/>
+        <Rectangle Grid.Column="1" Grid.Row="3" Fill="Black"/>
+        <Rectangle Grid.Column="1" Grid.Row="4" Fill="Black"/>
+        <Rectangle Grid.Column="1" Grid.Row="5" Fill="Black"/>
+        <CheckBox Content="CheckBox" Grid.Column="2" HorizontalAlignment="Left" Margin="311,214,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
