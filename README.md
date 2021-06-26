@@ -53,6 +53,7 @@ As for modifying this work, please make sure you give proper credit!
 
 ## Wanna collab?
 
+This project was made in 2 days while I was bored. If you have any suggestions, please pull and add them or contact me on discord. BIGDummyHead#8124
 Simply do the following.
 
 1. Make a pull request
