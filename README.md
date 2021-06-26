@@ -51,6 +51,17 @@ I know the design is not the best, but was made really fast! If you have any des
 
 As for modifying this work, please make sure you give proper credit!
 
+## Wanna collab?
+
+This project was made in 2 days while I was bored. If you have any suggestions, please pull and add them or contact me on discord. BIGDummyHead#8124
+Simply do the following.
+
+1. Make a pull request
+2. Change a decent portion of the code
+3. List changes of your code
+4. Describe what these changes do
+5. I'll approve 😄
+
 ## Dependencies
 
 [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) for Profiles. '.prof'
