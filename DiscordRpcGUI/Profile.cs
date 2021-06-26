@@ -80,7 +80,10 @@ namespace DiscordRpcGUI
                 prec.Party = new Party
                 {
                     Max = MaxPartySize,
-                    Size = PartySize
+                    Size = PartySize,
+                    Privacy = Party.PrivacySetting.Public,
+                    //this info is not filled in because there is NO ID
+                    ID = "PARTY ID"
                 };
 
             if (UseTimer)
