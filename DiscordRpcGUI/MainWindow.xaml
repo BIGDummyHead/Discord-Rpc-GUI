@@ -437,7 +437,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="ExitButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual2}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
@@ -501,9 +501,7 @@
 
 
         <DockPanel Grid.Row="0" Background="#FF36393F">
-            <TextBlock x:Name="title" Width="300" HorizontalAlignment="Right" Height="20"  FontSize="16" TextAlignment="Left" TextWrapping="Wrap" Foreground="White">
-                 Discord RPC on <Hyperlink NavigateUri="https://github.com/bigdummyhead" RequestNavigate="GotoHyper">GitHub</Hyperlink>
-            </TextBlock>
+
             <Rectangle Width="190" HorizontalAlignment="Right"/>
         </DockPanel>
         <DockPanel Grid.Column="2" Background="#FF36393F">
@@ -512,15 +510,26 @@
             </Button>
             <Button Style="{DynamicResource ExitButton}" BorderThickness="0" Background="#FF1A1A1A" Foreground="White" Content="X" FontWeight="UltraBlack" Width="30" HorizontalAlignment="Right" Click="CloseApplication"/>
         </DockPanel>
-        <DockPanel Width="340" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
+        <DockPanel Width="340" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent">
+            
+        </DockPanel>
+
+        <DockPanel Width="59" HorizontalAlignment="Left">
+            <Rectangle Width="2" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="title" Width="51" HorizontalAlignment="Left" Height="20"  FontSize="16" TextAlignment="Left" TextWrapping="Wrap" Foreground="White">
+                <Hyperlink NavigateUri="https://github.com/bigdummyhead" RequestNavigate="GotoHyper">GitHub</Hyperlink>
+            </TextBlock>
+        </DockPanel>
+        
         <DockPanel Grid.Column="2" Width="90" HorizontalAlignment="Left" PreviewMouseDown="DragWindow" Background="Transparent" />
 
-       
 
 
 
         <!-- Binding data for visualizer and for creating the actual rpc-->
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" Grid.Row="2" Height="440" Background="#FF36393F">
+
+            
             <StackPanel>
                 <DockPanel>
                     <StackPanel>
@@ -664,9 +673,9 @@
             </StackPanel>
         </ScrollViewer>
 
-        <DockPanel x:Name="hideableOpap" Visibility="Visible" Grid.Row="2" Height="440" Background="Black" Opacity=".8"/>
-        <TextBlock x:Name="hideableTb" Grid.Row="2" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="29">Your RPC is currently running!</TextBlock>
-        <Button x:Name="hideableButt" Grid.Row="2" Content="STOP" Height="50" Background="Black" Opacity=".85" Foreground="Red" FontSize="25" Width="100" Margin="150,285,150,105" Click="StopRpc"/>
+        <DockPanel x:Name="hideableOpap" Visibility="Hidden" Grid.Row="2" Height="440" Background="Black" Opacity=".8"/>
+        <TextBlock x:Name="hideableTb" Grid.Row="2" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="29" Visibility="Hidden">Your RPC is currently running!</TextBlock>
+        <Button Style="{DynamicResource GrayButton}" Visibility="Hidden" x:Name="hideableButt" Grid.Row="2" Content="STOP" Height="50" Background="Black" Opacity=".85" Foreground="Red" FontSize="25" Width="100" Margin="150,285,150,105" Click="StopRpc"/>
 
 
 

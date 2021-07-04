@@ -1,22 +1,18 @@
-﻿using System;
+﻿using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using System.Globalization;
-using System.Media;
-using DiscordRPC;
 
 namespace DiscordRpcGUI
 {
@@ -28,7 +24,13 @@ namespace DiscordRpcGUI
         public static MainWindow Instance { get; private set; }
         public MainWindow()
         {
+            new ErrorLog();
             Instance = this;
+            Check();
+
+            if (instanceCheck)
+                return;
+
             InitializeComponent();
 
             RunChange(false);
@@ -41,11 +43,14 @@ namespace DiscordRpcGUI
             Load(DefaultProfile);
 
             UpdateProfiles();
-            ContextMenu = new ContextMenu()
-            {
-                
-            };
-             ContextMenu.Items.Add("Exit");
+            ContextMenu = new();
+            ContextMenu.Items.Add("Exit");
+        }
+
+        private bool instanceCheck = false;
+        async void Check()
+        {
+            instanceCheck = await App.OneInstance();
         }
 
         public void UpdateProfiles(Profile toSelect = null)
@@ -124,7 +129,7 @@ namespace DiscordRpcGUI
             int partSize = 0;
             int max = 0;
 
-            if((bool)allowJoin.IsChecked)
+            if ((bool)allowJoin.IsChecked)
             {
                 max = Max_PartySize;
                 partSize = PartySize;
@@ -235,7 +240,7 @@ namespace DiscordRpcGUI
             CurrentProfile = profile;
         }
 
-        
+
 
 
         private void CloseApplication(object sender, RoutedEventArgs e)
@@ -256,6 +261,7 @@ namespace DiscordRpcGUI
 
         private void GotoHyper(object sender, RequestNavigateEventArgs e)
         {
+            MessageBox.Show(e.Uri.AbsoluteUri);
             OpenUrl(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
@@ -362,6 +368,8 @@ namespace DiscordRpcGUI
 
             client = new DiscordRpcClient(profile.ApplicationID);
 
+            client.Logger = ErrorLog.Instance;
+
             client.Initialize();
 
             client.SetPresence(presence);
@@ -444,6 +452,7 @@ namespace DiscordRpcGUI
 
             client.Deinitialize();
             client = null;
+            ErrorLog.Instance.Wipe();
         }
 
         private void BigImgEnter(object sender, MouseEventArgs e)
@@ -479,8 +488,7 @@ namespace DiscordRpcGUI
 
         private void HideApp(object sender, RoutedEventArgs e)
         {
-            Visibility = Visibility.Collapsed;
-            ShowInTaskbar = false;
+            
 
             App.Min();
         }
